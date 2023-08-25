@@ -77,6 +77,14 @@ public class User {
 
 
 
+	public User(String firstName, String lastName, String email, String password) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
