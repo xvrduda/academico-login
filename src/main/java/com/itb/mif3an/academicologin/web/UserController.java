@@ -10,4 +10,10 @@ public class UserController {
 	public String login() {
 		return "login";
 	}
+	
+	@GetMapping("/home")
+	public String homeUser() {
+		
+		return "index";
+	}
 }
