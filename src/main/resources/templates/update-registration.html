@@ -59,7 +59,7 @@
 
 				<h1>Registration</h1>
 
-				<form th:action="@{/registration}" method="post" th:object="${user}">
+				<form th:action="@{/users/perfil}" method="post" th:object="${user}">
 					<div class="form-group">
 						<label class="control-label" for="firstName"> First Name </label>
 						<input id="firstName" class="form-control" th:field="*{firstName}" required
@@ -109,10 +109,16 @@
 						<input id="cidade" class="form-control" type="text" th:field="*{enderecos[0].cidade}"
 							required autofocus="autofocus" />
 					</div>
+					
+					<div class="form-group">
+						<label class="control-label" for="uf">Estado</label>
+						<input id="uf" class="form-control" type="text" th:field="*{enderecos[0].uf}"
+							required autofocus="autofocus" />
+					</div>
 
 
 					<div class="form-group">
-						<button type="submit" class="btn btn-success" id="botao" onclick="">Register</button>
+						<button type="submit" class="btn btn-success" id="botao" onclick="">Update</button>
 						<span>Already registered? <a href="/" th:href="@{/login}">Login
 								here</a></span>
 					</div>

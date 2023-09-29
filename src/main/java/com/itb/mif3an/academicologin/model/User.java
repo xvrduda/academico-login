@@ -86,13 +86,22 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
-	
 
 	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.roles = roles;
+	}
+
+	public User(String firstName, String lastName, String email, String password, List<Endereco> enderecos,
+			Collection<Role> roles) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.enderecos = enderecos;
 		this.roles = roles;
 	}
 

@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.itb.mif3an.academicologin.model.Role;
@@ -43,8 +42,11 @@ public class UseServiceImpl implements UserService {
 
 		User user = new User(userDto.getFirstName(),
 							userDto.getLastName(),
-							userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()),
-							new ArrayList<>());
+							userDto.getEmail(), 
+							passwordEncoder.encode(userDto.getPassword()),
+							new ArrayList<>(), //PARA ENDEREÇOS
+				
+							new ArrayList<>()); // PARA PAPÉIS
 
 		userRepository.save(user);
 		this.addRoleToUser(user.getEmail(), "ROLE_USER");
@@ -98,6 +100,19 @@ public class UseServiceImpl implements UserService {
 		User user = userRepository.findByEmail(username);
 		
 		return user;
+	}
+
+	@Override
+	public User update(UserDto userDto) {
+		
+		User user = userRepository.findByEmail(userDto.getEmail());
+		user.setFirstName(user.getFirstName());
+		user.setLastName(userDto.getLastName());
+		user.setDataNascimento(userDto.getDataNascimento());
+		user.setEnderecos(userDto.getEnderecos());
+		
+		
+		return userRepository.save(user);
 	}
 
 }
