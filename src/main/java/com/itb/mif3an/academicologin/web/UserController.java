@@ -48,5 +48,37 @@ public class UserController {
 		}
 
 		return home;
+		
+	}
+	
+	@GetMapping("/users/home")
+	public String homeUser(Model model) {
+		
+		String home = "index";
+		User user = userService.getAuthenticatedUser();
+		String username = user.getEmail();
+		model.addAttribute("username", username);
+ 
+		return home;
+	}
+ 
+ 
+	@GetMapping("/users/perfil/{username}")
+	public String showPerfilForm(@PathVariable("username") String username, ModelMap model) {
+ 
+		UserDto userDto = new UserDto();
+		userDto.setEmail(username);
+		User user = userService.findByEmail(userDto.getEmail());
+		model.addAttribute("user", user);
+ 
+		return "update-registration";
+	}
+	
+	@PostMapping("/users/perfil")
+	public String updatePerfilAccount(@ModelAttribute("user")UserDto userDto) {
+ 
+		User user = userService.update(userDto);
+ 
+		return "redirect:/users/perfil/" + user.getEmail();
 	}
 }
